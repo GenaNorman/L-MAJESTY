@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import Aboutpage from "./pages/Aboutpage.js";
+import Impacts from "./pages/Impacts";
+import Votepage from "./pages/Votepage";
+import Pagenotfound from "./pages/Pagenotfound.js";
+import { NominationContext } from "./context/NominationContext.js";
+import Nominiprofile from "./components/Nominiprofile.js";
+import initialCandidates from "./assets/initialcandidates.js";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NominationContext>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="Aboutpage" element={<Aboutpage />} />
+          <Route path="Impacts" element={<Impacts />} />
+          <Route path="Votepage" element={<Votepage />}>
+            <Route path='user' element={<Nominiprofile />} />
+          </Route>
+          <Route path="*" element={<Pagenotfound />} />
+        </Routes>
+      </BrowserRouter>
+    </NominationContext>
   );
 }
 
